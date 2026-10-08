@@ -8,7 +8,18 @@ For an [MSIX Store submission](https://learn.microsoft.com/windows/apps/package-
 
 ## Publisher setup
 
-The owner confirmed that no Partner Center developer account or EIMAGE application reservation exists yet. Consequently, a real submission package cannot be generated with the correct assigned identity, and the app is not published or certified.
+The owner supplied the reserved EIMAGE Product identity on 8 October 2026. These are public package identifiers, not credentials:
+
+| Field                      | Assigned value                            |
+| -------------------------- | ----------------------------------------- |
+| Package identity name      | `YiitBayrak.EIMAGE`                       |
+| Package identity publisher | `CN=A89C16B3-0B3D-4165-A53D-6B7239DD716E` |
+| Publisher display name     | Yiğit Bayrak                              |
+| Reserved display name      | EIMAGE                                    |
+| Package family name        | `YiitBayrak.EIMAGE_aqfj28bq67dey`         |
+| Store ID                   | `9NQCCCZPTW3N`                            |
+
+Copied HTML space markers were removed from these values. The initial submission package version is `1.0.0.0`. Reservation and an assigned Store ID do not mean that the app is published or certified. The following registration steps describe the original setup; subsequent packages use this assigned identity.
 
 1. Start at [storedeveloper.microsoft.com](https://storedeveloper.microsoft.com) and choose **Get started for free**. Microsoft's [current registration documentation](https://learn.microsoft.com/windows/apps/publish/partner-center/open-a-developer-account) says this new onboarding flow has no registration fee; older entry points can show the legacy flow.
 2. Select the account type that matches the actual publisher. Complete Microsoft's own identity/business verification and developer agreement. The account owner must do this; do not invent a legal publisher or submit identity documents through this repository.
@@ -46,6 +57,10 @@ npm ci
 npm run build:desktop -- --ci --no-bundle --no-sign
 pwsh -NoProfile -File scripts/package-store.ps1
 ```
+
+## First prepared package
+
+The assigned-identity build [completed successfully](https://github.com/AlgoWolfx/EImage/actions/runs/37788577088) for version `1.0.0.0`. Download [the submission artifact](https://github.com/AlgoWolfx/EImage/actions/runs/37788577088/artifacts/11555064168) while signed in to GitHub, extract the ZIP and select `EIMAGE_1.0.0.0_x64_store-upload.msix` in **Partner Center → EIMAGE → New submission → Packages**. Upload the MSIX, not its ZIP or the earlier NSIS executable. Artifacts are temporary; download and retain this package before its GitHub retention period ends. Complete the listing and review forms before submitting for certification.
 
 ## Certification and listing
 

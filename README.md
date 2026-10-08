@@ -28,7 +28,7 @@ The companion website includes a functioning local editor demo. **Screen capture
 
 Public installers, signed releases and a live website are not published yet. The [releases page](https://github.com/AlgoWolfx/EIMAGE/releases) is the official place to check download availability. CI artifacts are unsigned test builds, not an audited release.
 
-**Windows consumer distribution will use Microsoft Store with an MSIX package.** Microsoft signs this package after certification. The unsigned NSIS test installer can trigger SmartScreen; it is not the public installation route. Store account setup, actual publisher identity and Microsoft review are still pending. See [Store packaging and publication](docs/MICROSOFT_STORE.md).
+**Windows consumer distribution will use Microsoft Store with an MSIX package.** Microsoft signs this package after certification. The unsigned NSIS test installer can trigger SmartScreen; it is not the public installation route. The owner has supplied the assigned Partner Center identity. Microsoft review, signing and publication are still pending. See [Store packaging and publication](docs/MICROSOFT_STORE.md).
 
 macOS needs Screen Recording permission. Linux Wayland support depends on the compositor and portals; X11 is the initial validation target. No background/global hotkey or screen-recording feature is claimed in this version.
 

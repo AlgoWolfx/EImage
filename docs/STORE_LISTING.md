@@ -4,7 +4,7 @@ This is factual submission copy, not an approved or published Store page. Use th
 
 ## Name and description
 
-Proposed reserved name: **EIMAGE** (availability is not yet established).
+Reserved name: **EIMAGE**. Owner-supplied Store ID: `9NQCCCZPTW3N`; publication and certification remain pending.
 
 Short description:
 

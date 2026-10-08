@@ -38,10 +38,16 @@ The release Tauri binary was launched in WebKit on Debian 13, x86-64, with a 144
 
 [The Store packaging run](https://github.com/AlgoWolfx/EImage/actions/runs/37785835577), source commit `e21634366cc584e1aec7594df1c8cbd87592fb43`, completed successfully. Its Windows job `113340212225` ran the real `Validate Microsoft Store MSIX packaging (non-publishable fixture)` step. MakeAppx packed the actual Windows binary with SDK validation enabled, unpacked the MSIX, compared every staged file hash and the exact identity, and verified absence of a signature in the submission fixture. The validation MSIX was not uploaded or offered to consumers. The production path independently refuses missing Partner Center identity; it has no production fallback.
 
-The same run passed the web, Linux and macOS jobs. The web unit suite now runs 25 cases (15 editor + 10 Store); the production browser suite remains 13 cases. Store signing/certification, a real account-bound submission, installed-MSIX behavior and the Windows App Certification Kit remain unverified.
+The same run passed the web, Linux and macOS jobs. The web unit suite now runs 25 cases (15 editor + 10 Store); the production browser suite remains 13 cases. Store signing/certification, Partner Center upload, installed-MSIX behavior and the Windows App Certification Kit remain unverified.
+
+## Package with assigned Store identity
+
+[The actual-identity packaging run](https://github.com/AlgoWolfx/EImage/actions/runs/37788577088), source `4ad61be12d6b56b4bf5a272353e69269a48f95ff`, completed successfully on 8 October 2026. It validated the owner-supplied `YiitBayrak.EIMAGE` identity, ran the 25 unit tests, built the x64 Windows executable, and passed MakeAppx validation and unpacked file/identity checks for Store package `1.0.0.0`.
+
+[The submission artifact](https://github.com/AlgoWolfx/EImage/actions/runs/37788577088/artifacts/11555064168), `eimage-Microsoft-Store-submission-x64`, contains the unsigned MSIX, package metadata and file checksum. GitHub reports archive SHA-256 `76191781396115d52535e6e27df92621c61d2b244c979d29b163cdb7745b55d5`; this is the ZIP archive digest, not the MSIX digest. The owner must extract and upload the `.msix` to Partner Center. This is a prepared submission package, not a signed consumer installer or evidence of Store approval. The artifact was verified through successful Windows workflow steps and GitHub artifact metadata; cloud download of artifact blobs is blocked by current network policy.
 
 ## Still pending
 
 Windows/macOS builds and unit/package checks passed on their own GitHub runners. Their physical OS capture permissions, installed-package save/clipboard behavior, Store signing/certification and macOS notarization remain pending. Wayland and physical multi-monitor/HiDPI systems also need target-device testing. Chromium does not establish Firefox/Safari compatibility; the native Linux run verifies WebKit on the stated X11 setup only.
 
-Public installers and a live website have not been released. GitHub Actions artifacts, when a job succeeds, are unsigned test builds. No VirusTotal result, security audit or guarantee of absence of malware is claimed. See [SECURITY.md](../SECURITY.md) for independent verification.
+Public installers and a live website have not been released. Native CI artifacts are unsigned test builds; the actual-identity Store artifact is an unsigned package for Microsoft submission only. No VirusTotal result, security audit or guarantee of absence of malware is claimed. See [SECURITY.md](../SECURITY.md) for independent verification.
