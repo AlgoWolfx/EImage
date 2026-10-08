@@ -1,0 +1,76 @@
+.desktop-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 7px 22px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.desktop-main {
+  padding: 0 20px;
+}
+.desktop-main .editor {
+  height: calc(100vh - 100px);
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+}
+.desktop-main .editor-header,
+.desktop-main .toolbar,
+.desktop-main .editor-status {
+  flex-shrink: 0;
+}
+.desktop-main .editor-workspace {
+  flex: 1;
+  min-height: 0;
+}
+.desktop-main .image-workspace {
+  min-height: 0;
+}
+.desktop-main .canvas-stage {
+  height: auto;
+  flex: 1;
+  min-height: 0;
+}
+.desktop-main .inspector {
+  overflow-y: auto;
+}
+.desktop-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 23px;
+  color: var(--muted);
+  font-size: 11px;
+}
+@media (max-width: 850px) {
+  .desktop-main {
+    padding: 0 12px;
+  }
+  .desktop-bottom {
+    flex-wrap: wrap;
+    padding-inline: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .desktop-main .editor {
+    height: auto;
+    min-height: 0;
+    display: block;
+  }
+  .desktop-main .canvas-stage {
+    min-height: 260px;
+    height: 330px;
+  }
+  .desktop-top {
+    padding-inline: 16px;
+  }
+  .desktop-main .editor-workspace {
+    min-height: 0;
+  }
+  .desktop-main .inspector {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+desktop-dist/
+release/
+artifacts/
+test-results/
+tests/fixtures/
+.impeccable/review/
+public/
+graphify-out/

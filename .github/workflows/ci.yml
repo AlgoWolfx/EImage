@@ -1,0 +1,67 @@
+name: Validate and build
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  web:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run format:check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eimage-website
+          path: dist/site
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            bundles: deb
+          - os: windows-latest
+            bundles: nsis
+          - os: macos-latest
+            bundles: app,dmg
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev librsvg2-dev patchelf libxdo-dev libclang-dev libpipewire-0.3-dev libgbm-dev
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: apps/desktop/src-tauri
+      - run: npm ci
+      - run: cargo fmt --manifest-path apps/desktop/src-tauri/Cargo.toml --check
+      - run: cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
+      - run: npm run build:desktop -- --ci --bundles ${{ matrix.bundles }}
+      - run: node scripts/checksums.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eimage-${{ runner.os }}-unsigned-test-build
+          path: |
+            apps/desktop/src-tauri/target/release/bundle/**/*.deb
+            apps/desktop/src-tauri/target/release/bundle/**/*.exe
+            apps/desktop/src-tauri/target/release/bundle/**/*.dmg
+            apps/desktop/src-tauri/target/release/bundle/SHA256SUMS.txt
+          if-no-files-found: error

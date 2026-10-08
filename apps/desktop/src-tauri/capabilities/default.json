@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Local editor window only. Native commands expose capture, bounded image saving and clipboard operations; no shell or arbitrary filesystem plugin.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

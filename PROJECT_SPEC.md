@@ -1,106 +1,31 @@
-# EImage — Project Specification
+# EIMAGE — Desktop screenshot tool
 
-## Goal
+The confirmed user brief supersedes the old image converter plan, preserved in [docs/ARCHIVED_IMAGE_CONVERTER_BRIEF.md](docs/ARCHIVED_IMAGE_CONVERTER_BRIEF.md).
 
-Build a high-quality local-first image utility for everyday conversion and optimization.
+## Product
 
-The product should be faster and simpler than opening a full image editor.
+A free, MIT-licensed desktop screenshot tool targeting Windows, macOS and Linux. Tauri v2 + Rust provides native capture, a save dialog and the image clipboard. React + TypeScript provides a shared local canvas editor and a static promotional website.
 
-## v1 formats
+## Workflow
 
-Input:
-- JPEG/JPG
-- PNG
-- WebP
+Capture a screen or window, optionally select a region after capture, or open a PNG/JPEG/WebP. Add arrows, rectangles, freehand strokes and text; cover private details with solid pixels; crop; undo/redo. Save a flattened PNG/JPEG/WebP or copy a flattened PNG. Preserve the current document on failed imports, canceled save dialogs and capture failures. Replacing an edited image requires a deliberate choice.
 
-Output:
-- JPEG
-- PNG
-- WebP
+## Interface
 
-Add AVIF when browser/runtime support is reliable.
+User-confirmed layout: tools above a large central image, settings on the right. The website starts with a functioning editor example, then explains capture → edit → share and exposes source/release status. Maintain the EQR/EMeta Emil Kowalski + Impeccable direction, system typography, light/dark themes, keyboard focus and reduced motion. English is the standing source language.
 
-Evaluate HEIC separately; do not claim native support until tested.
+## Privacy and truthful claims
 
-## Core operations
+No account, subscriptions, paid features, watermark, uploads or telemetry. Images remain in memory until explicit save/copy. The OS clipboard and saved files have their own lifetime. Undo and original input retain source content until cleared; only exported concealed pixels are covered permanently. Do not claim forensic sanitization, malware-free guarantees, signing, completed VirusTotal scans or working public installers without evidence.
 
-- convert format
-- resize by width/height
-- preserve aspect ratio
-- resize by percentage
-- compression/quality
-- rotate
-- crop
-- remove metadata
-- batch processing
-- rename output pattern
-- download one file or ZIP
+## Runtime limits
 
-## UX
+30 MB encoded input, 32 megapixels and 16,384 pixels per side. Undo retains 60 states. These bounds protect memory; they are not licensing or usage quotas. Linux Wayland depends on compositor/portal support; X11 is the initial test session. macOS needs Screen Recording permission. Keyboard capture shortcuts are available while EIMAGE has focus; background/global hotkeys and screen recording are outside this version.
 
-Main workflow:
+## Delivery checks
 
-Drop images → choose operation/output settings → preview estimated/result sizes → process → download.
+TypeScript unit tests; actual canvas exports, opaque concealment, undo/redo, crop dimensions, image formats, failed input, accessibility, responsive layout and local-only requests in a browser. Rust validation tests and a real Linux Tauri capture/clipboard/save smoke test. Native packages must build on their respective OS in CI. Keep platform validation, signing, source publication, binary publication and website deployment separate.
 
-Requirements:
-- drag/drop and file picker
-- multiple files
-- per-file status
-- cancel/retry
-- clear before/after size
-- sensible defaults
-- no unnecessary wizard
-- responsive design
-- light/dark mode
-- accessible controls
+## SEO
 
-## Privacy
-
-Perform image processing locally wherever practical.
-
-Core v1 must not require file uploads to EGORA or any third-party server.
-
-## Performance
-
-- do not block the main UI during large batches
-- use workers where useful
-- limit concurrency
-- release object URLs/memory
-- handle hundreds of images gracefully
-- expose progress
-
-## Engineering
-
-- separate codecs/processors from UI
-- typed processing pipeline
-- deterministic operation model
-- reusable design system
-- tests for dimensions, output MIME types and metadata removal
-- graceful browser capability detection
-
-## Quality bar
-
-- output opens correctly in standard viewers
-- orientation is preserved or normalized intentionally
-- transparency behavior is clear when converting PNG to JPEG
-- color/quality degradation is not hidden from the user
-- large image batches do not freeze the app
-
-## Delivery order
-
-1. Build design system and dropzone.
-2. Implement JPEG/PNG/WebP conversion.
-3. Add resize.
-4. Add compression controls.
-5. Add batch queue and progress.
-6. Add metadata removal.
-7. Add crop/rotate.
-8. Add ZIP download and naming patterns.
-9. Add tests and performance pass.
-10. Add AVIF if robust.
-
-## Brand
-
-Built by Yiğit Bayrak · EGORA Digital
-
-Do not watermark user images.
+Static rendered content, descriptive title/metadata, zero-price SoftwareApplication data, canonical URL, robots and sitemap. PUBLIC_SITE_URL remains unset until a real HTTPS domain is chosen; unconfigured preview builds use noindex and an empty sitemap. No invented reviews, download counts or scan results.
