@@ -20,11 +20,11 @@ The companion website includes a functioning local editor demo. **Screen capture
 
 ## Platform and release status
 
-| Target  | Current status                                                                                                 |
-| ------- | -------------------------------------------------------------------------------------------------------------- |
-| Linux   | Built and exercised in a Debian 13 X11 virtual desktop; see [validation](docs/VALIDATION.md) for exact checks. |
-| Windows | Source/build target and CI packaging configured; native validation pending.                                    |
-| macOS   | Source/build target and CI packaging configured; native validation pending.                                    |
+| Target  | Current status                                                                                                                                               |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Linux   | Built and exercised in a Debian 13 X11 virtual desktop; see [validation](docs/VALIDATION.md) for exact checks.                                               |
+| Windows | NSIS build and Rust tests passed on GitHub’s Windows runner. MSIX SDK packaging validated; Store signing/publication and physical native validation pending. |
+| macOS   | App/DMG build and Rust tests passed on GitHub’s macOS runner; physical native validation and notarization pending.                                           |
 
 Public installers, signed releases and a live website are not published yet. The [releases page](https://github.com/AlgoWolfx/EIMAGE/releases) is the official place to check download availability. CI artifacts are unsigned test builds, not an audited release.
 
