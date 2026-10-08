@@ -41,3 +41,5 @@ MIT LICENSE exists. The repository initially contained only README.md, LICENSE a
 ## Open Decisions
 
 Website domain, release signing credentials and release publication are not selected. Cross-platform source support is not evidence that every packaged platform has been tested.
+
+The user reported SmartScreen blocking the unsigned Windows test installer and selected free Microsoft Store distribution. Windows consumer packages must follow the MSIX route with the real Partner Center identity and Microsoft certification/signing. The user has no developer account or app reservation yet. Store signing does not require purchasing an external certificate; publishing and trust must never be claimed from SDK package validation alone.

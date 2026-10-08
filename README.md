@@ -28,6 +28,8 @@ The companion website includes a functioning local editor demo. **Screen capture
 
 Public installers, signed releases and a live website are not published yet. The [releases page](https://github.com/AlgoWolfx/EIMAGE/releases) is the official place to check download availability. CI artifacts are unsigned test builds, not an audited release.
 
+**Windows consumer distribution will use Microsoft Store with an MSIX package.** Microsoft signs this package after certification. The unsigned NSIS test installer can trigger SmartScreen; it is not the public installation route. Store account setup, actual publisher identity and Microsoft review are still pending. See [Store packaging and publication](docs/MICROSOFT_STORE.md).
+
 macOS needs Screen Recording permission. Linux Wayland support depends on the compositor and portals; X11 is the initial validation target. No background/global hotkey or screen-recording feature is claimed in this version.
 
 ## Development
@@ -85,6 +87,8 @@ Images stay in memory until you copy or save. Only a theme preference is stored 
 Concealment covers only the selected area in the exported pixels. The original image and undo history may still contain that information; inspect the result before sharing. Memory bounds (30 MB input, 32 megapixels, 16,384 pixels per side, 60 undo states) protect stability and are not paid quotas.
 
 Read [SECURITY.md](SECURITY.md) to compare checksums, inspect signatures when available and scan an installer yourself with [VirusTotal](https://www.virustotal.com/gui/home/upload). **No completed scan or malware-free guarantee is claimed.** EIMAGE never sends files to VirusTotal automatically.
+
+The [privacy policy](PRIVACY.md) describes image access, local storage and the system clipboard.
 
 ## Project notes
 

@@ -54,8 +54,12 @@ jobs:
       - run: npm ci
       - run: cargo fmt --manifest-path apps/desktop/src-tauri/Cargo.toml --check
       - run: cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
-      - run: npm run build:desktop -- --ci --bundles ${{ matrix.bundles }}
+      - run: npm run build:desktop -- --ci --no-sign --bundles ${{ matrix.bundles }}
       - run: node scripts/checksums.mjs
+      - name: Validate Microsoft Store MSIX packaging (non-publishable fixture)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/package-store.ps1 -ValidationOnly
       - uses: actions/upload-artifact@v4
         with:
           name: eimage-${{ runner.os }}-unsigned-test-build
@@ -65,3 +69,4 @@ jobs:
             apps/desktop/src-tauri/target/release/bundle/**/*.dmg
             apps/desktop/src-tauri/target/release/bundle/SHA256SUMS.txt
           if-no-files-found: error
+          retention-days: 7

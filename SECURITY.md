@@ -11,6 +11,14 @@ EIMAGE is open source and free. It does not upload screenshots, run telemetry, l
 
 No completed VirusTotal scan, detection count, malware-free guarantee, security certification or independent security audit is claimed. Open source, checksums and scan results are separate forms of evidence and have practical limits.
 
+## Windows SmartScreen and Store distribution
+
+The first unsigned Windows test installer triggered SmartScreen on the user's PC. That screenshot is direct evidence of the installation warning; it does not by itself establish a malware detection or a clean security verdict.
+
+The selected consumer route is Microsoft Store **MSIX**, which Microsoft signs after certification. Publisher account setup and Store approval are not completed. The build scripts prepare an unsigned package for Microsoft submission, not for users to sideload. Missing publisher identity fails packaging instead of substituting a production placeholder. Validation-only MSIX files are never uploaded as consumer downloads.
+
+Do not disable SmartScreen/Smart App Control, strip Mark of the Web, install a test root certificate on user PCs or claim that a VirusTotal scan removes reputation warnings. External Authenticode signatures can still show reputation warnings for a new file; purchasing an EV certificate does not guarantee immediate SmartScreen trust. Follow [Microsoft's guidance](https://learn.microsoft.com/windows/apps/package-and-deploy/smartscreen-reputation) and [the Store procedure](docs/MICROSOFT_STORE.md).
+
 ## Concealment
 
 Conceal places an opaque solid cover over the selected pixels in an exported image. It does not sanitize the original file, editor undo history, older copies, other applications, OS caches or process memory. Inspect the whole output before sharing; text or identifying content outside your selected area can remain. Clear the editor when finished. PNG/JPEG/WebP exports are fresh canvas images without original container metadata or editable layers; this is not a promise of forensic anonymization.
